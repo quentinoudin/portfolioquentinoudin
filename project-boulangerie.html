@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Boulangerie - Détail du projet de Quentin Oudin" />
+  <title>Boulangerie - Quentin Oudin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Slab:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .project-page {
+      min-height: 100vh;
+      padding: 2rem clamp(1.25rem, 5vw, 3rem) 4rem;
+      background:
+        radial-gradient(circle at top left, rgba(245, 158, 11, 0.16), transparent 28%),
+        radial-gradient(circle at top right, rgba(217, 119, 6, 0.12), transparent 26%),
+        linear-gradient(180deg, #0b1220 0%, #0f172a 42%, #111827 100%);
+    }
+    .project-page__shell { width: min(1140px, 100%); margin: 0 auto; }
+    .project-page__back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      color: #fcd34d;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-family: var(--f-title);
+      font-size: 0.8rem;
+    }
+    .project-page__back:hover { color: #fde68a; }
+    .project-page__hero {
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+      border-radius: 1.25rem;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.92) 0%, rgba(146, 64, 14, 0.85) 55%, rgba(217, 119, 6, 0.9) 100%);
+      color: #f8fafc;
+      margin-bottom: 1.2rem;
+      border: 1px solid rgba(252, 211, 77, 0.18);
+      box-shadow: 0 24px 70px rgba(2, 6, 23, 0.38);
+    }
+    .project-page__eyebrow { font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(248, 250, 252, 0.7); margin-bottom: 0.75rem; }
+    .project-page__hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 0.8rem; color: #ffffff; }
+    .project-page__subtitle { color: rgba(248, 250, 252, 0.88); font-size: 1.05rem; line-height: 1.7; max-width: 70ch; margin-bottom: 1.25rem; }
+    .project-page__meta, .project-page__chips { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .project-page__meta { margin-bottom: 0.9rem; }
+    .project-page__meta span, .project-page__chips span, .project-page__link { display: inline-flex; align-items: center; padding: 0.45rem 0.7rem; border-radius: 999px; font-size: 0.8rem; line-height: 1; }
+    .project-page__meta span { background: rgba(255, 255, 255, 0.12); color: #f8fafc; border: 1px solid rgba(255, 255, 255, 0.16); }
+    .project-page__chips span { background: rgba(253, 230, 138, 0.96); color: #78350f; }
+    .project-page__layout { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr); gap: 1.25rem; margin-bottom: 1.25rem; }
+    .project-page__panel {
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.96) 0%, rgba(17, 24, 39, 0.96) 100%);
+      border-radius: 1rem;
+      border: 1px solid rgba(217, 119, 6, 0.22);
+      padding: 1.25rem;
+      box-shadow: 0 18px 45px rgba(2, 6, 23, 0.26);
+    }
+    .project-page__panel h2 { color: #fde68a; margin-bottom: 0.8rem; font-size: 1rem; }
+    .project-page__panel p { color: #cbd5e1; line-height: 1.8; font-size: 0.96rem; }
+    .project-page__list { display: grid; gap: 0.7rem; padding-left: 1rem; }
+    .project-page__list li { color: #cbd5e1; line-height: 1.7; font-size: 0.95rem; }
+    .project-page__media-shell {
+      border-radius: 1.15rem;
+      border: 1px solid rgba(217, 119, 6, 0.22);
+      background:
+        linear-gradient(180deg, rgba(15, 23, 42, 0.84) 0%, rgba(30, 41, 59, 0.96) 100%),
+        radial-gradient(circle at top right, rgba(217, 119, 6, 0.16), transparent 35%);
+      padding: 1rem;
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+    .project-page__media-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      color: #fde68a;
+    }
+    .project-page__media-top h2 { margin: 0; font-size: 1rem; color: #fde68a; }
+    .project-page__links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem; }
+    .project-page__link { background: #111827; color: #f8fafc; text-decoration: none; cursor: pointer; }
+    .project-page__link--secondary { background: #e2e8f0; color: #0f172a; }
+    .project-page__link--disabled { opacity: 0.45; cursor: not-allowed; pointer-events: none; }
+    .project-page__note { margin-top: 1rem; color: #64748b; font-size: 0.88rem; font-style: italic; }
+    @media (max-width: 900px) { .project-page__layout { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <main class="project-page">
+    <div class="project-page__shell">
+      <a class="project-page__back" href="index.html#projets"><i class="fas fa-arrow-left" aria-hidden="true"></i> Retour aux projets</a>
+
+      <section class="project-page__hero">
+        <p class="project-page__eyebrow">Stage Full Stack · Valtech, Paris</p>
+        <h1>Boulangerie</h1>
+        <p class="project-page__subtitle">Un site vitrine complet pour un artisan boulanger, conçu et développé de bout en bout durant mon stage Full Stack chez Valtech.</p>
+        <div class="project-page__meta">
+          <span>04/2024 - 06/2024</span><span>HTML, CSS, JavaScript, Bootstrap</span>
+        </div>
+        <div class="project-page__chips"><span>4 boutiques référencées</span><span>Catalogue produits complet</span><span>Avis clients</span><span>Livré en production</span></div>
+        <div class="project-page__links">
+          <span class="project-page__link project-page__link--disabled" aria-disabled="true" title="Lien à venir"><i class="fas fa-arrow-up-right-from-square"></i> Voir le site</span>
+          <span class="project-page__link project-page__link--secondary project-page__link--disabled" aria-disabled="true" title="Lien à venir"><i class="fab fa-github"></i> GitHub</span>
+        </div>
+      </section>
+
+      <section class="project-page__media-shell">
+        <div class="project-page__media-top">
+          <h2>Captures d'écran</h2>
+          <span class="project-page__note">Aperçu du site vitrine de la boulangerie</span>
+        </div>
+        <div class="screenshot-carousel">
+          <div class="screenshot-carousel__viewport">
+            <div class="screenshot-carousel__track">
+              <div class="screenshot-carousel__slide"><img src="assets/images/projects/boulangerie/produits.png" alt="Catalogue des produits de la boulangerie" loading="lazy"></div>
+              <div class="screenshot-carousel__slide"><img src="assets/images/projects/boulangerie/boutiques.png" alt="Liste des boutiques avec horaires et itinéraire" loading="lazy"></div>
+              <div class="screenshot-carousel__slide"><img src="assets/images/projects/boulangerie/avis-clients.png" alt="Page des avis clients" loading="lazy"></div>
+            </div>
+          </div>
+          <button type="button" class="screenshot-carousel__btn screenshot-carousel__btn--prev" aria-label="Image précédente"><i class="fas fa-chevron-left"></i></button>
+          <button type="button" class="screenshot-carousel__btn screenshot-carousel__btn--next" aria-label="Image suivante"><i class="fas fa-chevron-right"></i></button>
+          <div class="screenshot-carousel__dots"></div>
+        </div>
+      </section>
+
+      <div class="project-page__layout">
+        <section class="project-page__panel">
+          <h2>Résumé</h2>
+          <p>L’objectif était de livrer à un artisan boulanger un site vitrine complet, de la conception à la mise en production : présentation des produits, des boutiques et des avis clients, avec une interface responsive construite sur Bootstrap.</p>
+        </section>
+
+        <section class="project-page__panel">
+          <h2>Ce qui a été livré</h2>
+          <ul class="project-page__list">
+            <li>Catalogue produits filtrable par catégorie (viennoiseries, pains, sandwiches, boissons).</li>
+            <li>Page boutiques multi-adresses avec horaires, téléphone et itinéraire.</li>
+            <li>Système d’avis clients avec tri et recherche.</li>
+            <li>Intégration HTML/CSS/JavaScript sur base Bootstrap pour un rendu responsive.</li>
+            <li>Versionnage et déploiement via Git.</li>
+          </ul>
+        </section>
+
+        <section class="project-page__panel">
+          <h2>Bilan</h2>
+          <p>Ce stage a été ma première livraison Full Stack de bout en bout, du HTML/CSS/JS jusqu’à l’intégration avec Bootstrap. Résultat : un site fonctionnel qui a augmenté la visibilité du client.</p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="portfolio.js"></script>
+</body>
+</html>

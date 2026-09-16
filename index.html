@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
@@ -91,10 +91,10 @@
         </a>
         <a href="/quentin_oudin_cv.pdf" target="_blank" rel="noopener noreferrer" class="nav-social-link" aria-label="Télécharger CV">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor">
-            <!-- Document PDF avec fond -->
+            <!-- Document CV avec fond -->
             <rect x="3" y="2" width="18" height="20" rx="1.5" fill="currentColor" opacity="0.1" stroke="currentColor" stroke-width="1.5"/>
-            <!-- Texte PDF -->
-            <text x="12" y="15" text-anchor="middle" font-family="system-ui, Arial, sans-serif" font-size="9" font-weight="900" fill="currentColor">PDF</text>
+            <!-- Texte CV -->
+            <text x="12" y="15" text-anchor="middle" font-family="system-ui, Arial, sans-serif" font-size="9" font-weight="900" fill="currentColor">CV</text>
           </svg>
         </a>
       </div>
@@ -119,11 +119,14 @@
 
       <div class="hero-grid" aria-hidden="true"></div>
 
+      <img class="mini-me mini-me--trophy" src="assets/images/about/mini-me/trophy.png" alt="" aria-hidden="true" loading="lazy">
+      <img class="mini-me mini-me--dj" src="assets/images/about/mini-me/dj.png" alt="" aria-hidden="true" loading="lazy">
+
       <div class="hero-content">
 
         <div class="hero-badge">
           <span class="badge-dot"></span>
-          Disponible pour un stage/alternance à partir de juin 2026
+          Disponible pour une alternance
         </div>
 
         <h1 id="hero-title" class="hero-title">
@@ -160,6 +163,9 @@
     ========================================== -->
     <section id="projets" class="section projects-section-new" aria-labelledby="projects-title">
 
+      <img class="mini-me mini-me--karting" src="assets/images/about/mini-me/karting.png" alt="" aria-hidden="true" loading="lazy">
+      <img class="mini-me mini-me--rally" src="assets/images/about/mini-me/rally.png" alt="" aria-hidden="true" loading="lazy">
+
       <div class="section-header">
         <h2 id="projects-title" class="section-title">
           <span class="section-number">02</span> Mes Projets
@@ -169,240 +175,147 @@
 
       <div class="projects-container">
 
-        <!-- PROJET 1 : CAR VALUE TRACKER -->
-        <article class="project-item project-item--text-left" aria-label="Projet : Car Value Tracker">
+        <!-- PROJET 1 : BOULANGERIE -->
+        <article class="project-item project-item--text-left" aria-label="Projet : Boulangerie">
           <div class="project-content">
             <div class="project-text">
               <div class="project-header">
-                <h3 class="project-title">Car Value Tracker</h3>
-                <span class="badge badge-status badge-personal">Personnel</span>
-                <span class="badge badge-progress badge-ongoing">En cours</span>
+                <h3 class="project-title">Boulangerie</h3>
               </div>
-              <p class="project-context">Application</p>
+              <p class="project-context">Stage développeur Full Stack</p>
               <p class="project-description">
-                Application Full-Stack d'évaluation automobile. Conception de l'architecture BDD, intégration de l'API Argus pour les données en temps réel, et solution de paiement sécurisée.
+                Mon stage en tant que développeur Full Stack chez Valtech : conception et développement d'un site vitrine complet pour un artisan boulanger, du catalogue produits aux avis clients.
               </p>
               <div class="project-tech-stack">
-                <span class="tech-tag">React</span>
-                <span class="tech-tag">Tailwind CSS</span>
-                <span class="tech-tag">Supabase</span>
-                <span class="tech-tag">PostgreSQL</span>
-                <span class="tech-tag">API REST</span>
+                <span class="tech-tag">HTML</span>
+                <span class="tech-tag">CSS</span>
+                <span class="tech-tag">JavaScript</span>
+                <span class="tech-tag">Bootstrap</span>
               </div>
-              <a href="#" class="btn btn-primary btn-project">
+              <a class="btn btn-primary btn-project" href="project-boulangerie.html">
                 <i class="fas fa-arrow-right"></i> Voir le projet
               </a>
             </div>
           </div>
           <div class="project-media">
-            <div class="media-placeholder" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-              <span class="media-icon">📺</span>
-              <span class="media-text">Vidéo bientôt</span>
+            <div class="media-placeholder media-placeholder--boulangerie">
+              <img src="assets/images/projects/boulangerie/produits.png" alt="Page produits du site vitrine de la boulangerie" class="project-screenshot" loading="lazy">
             </div>
           </div>
         </article>
 
-        <!-- PROJET 2 : PIXAR QUEST -->
+        <!-- PROJET 2 : PIT STOP CHALLENGE -->
+        <article class="project-item project-item--text-right" aria-label="Projet : Pit Stop Challenge">
+          <div class="project-media">
+            <div class="media-placeholder media-placeholder--pitstop">
+              <img src="assets/images/projects/pit-stop-challenge/run-2.png" alt="Écran de résultat du Pit Stop Challenge" class="project-screenshot project-screenshot--portrait" loading="lazy">
+            </div>
+          </div>
+          <div class="project-content">
+            <div class="project-text">
+              <div class="project-header">
+                <h3 class="project-title">Pit Stop Challenge</h3>
+              </div>
+              <p class="project-context">Mini-jeu de réflexes</p>
+              <p class="project-description">
+                Un mini-jeu de réflexes inspiré des arrêts au stand en F1 : cliquer sur les 4 roues le plus rapidement possible pour réaliser le meilleur temps.
+              </p>
+              <div class="project-tech-stack">
+                <span class="tech-tag">Google AI Studio</span>
+              </div>
+              <a class="btn btn-primary btn-project" href="project-pit-stop-challenge.html">
+                <i class="fas fa-arrow-right"></i> Voir le projet
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROJET 3 : CAR VALUE TRACKER -->
+        <article class="project-item project-item--text-left" aria-label="Projet : Car Value Tracker">
+          <div class="project-content">
+            <div class="project-text">
+              <div class="project-header">
+                <h3 class="project-title">Car Value Tracker</h3>
+              </div>
+              <p class="project-context">Estimation auto & suivi de cote (en cours de dev)</p>
+              <p class="project-description">
+                Projet encore en cours de développement : créer des alertes personnalisées, suivre l'évolution de son garage et générer un rapport PDF personnalisé par véhicule pour bien acheter sa voiture.
+              </p>
+              <div class="project-tech-stack">
+                <span class="tech-tag">Lovable</span>
+                <span class="tech-tag">Supabase</span>
+                <span class="tech-tag">Stripe</span>
+                <span class="tech-tag">Gmail</span>
+                <span class="tech-tag">Figma</span>
+              </div>
+              <a class="btn btn-primary btn-project" href="project-car-value-tracker.html">
+                <i class="fas fa-arrow-right"></i> Voir le projet
+              </a>
+            </div>
+          </div>
+          <div class="project-media">
+            <div class="media-placeholder media-placeholder--cvt">
+              <img src="assets/images/projects/car-value-tracker/accueil.png" alt="Écran d'accueil de Car Value Tracker" class="project-screenshot project-screenshot--portrait" loading="lazy">
+            </div>
+          </div>
+        </article>
+
+        <!-- PROJET 4 : PIXAR QUEST -->
         <article class="project-item project-item--text-right" aria-label="Projet : Pixar Quest">
           <div class="project-media">
-            <div class="media-placeholder" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-              <span class="media-icon">🎮</span>
-              <span class="media-text">Vidéo bientôt</span>
+            <div class="media-placeholder media-placeholder--pixar">
+              <img src="assets/images/projects/pixar-quest/accueil.png" alt="Scène 3D de la chambre Pixar Quest" class="project-screenshot" loading="lazy">
             </div>
           </div>
           <div class="project-content">
             <div class="project-text">
               <div class="project-header">
                 <h3 class="project-title">Pixar Quest</h3>
-                <span class="badge badge-status badge-academic">Académique</span>
-                <span class="badge badge-progress badge-completed">Terminée</span>
               </div>
-              <p class="project-context">Jeu 3D</p>
+              <p class="project-context">Jeu 3D interactif</p>
               <p class="project-description">
-                Jeu interactif 3D en navigateur. Game design, modélisation des scènes interactives et forte optimisation des performances graphiques multi-configurations.
+                Une chambre d'enfant peuplée de 20 objets cachés à relier à des films Pixar, pensée comme une chasse aux références jouable dans le navigateur.
               </p>
               <div class="project-tech-stack">
                 <span class="tech-tag">Three.js</span>
-                <span class="tech-tag">JavaScript</span>
-                <span class="tech-tag">HTML5/CSS3</span>
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">Blender</span>
+                <span class="tech-tag">Tripo AI</span>
+                <span class="tech-tag">GLB</span>
               </div>
-              <a href="#" class="btn btn-primary btn-project">
+              <a class="btn btn-primary btn-project" href="project-pixar-quest.html">
                 <i class="fas fa-arrow-right"></i> Voir le projet
               </a>
             </div>
           </div>
         </article>
 
-        <!-- PROJET 3 : MY AZERTY -->
+        <!-- PROJET 5 : MY AZERTY -->
         <article class="project-item project-item--text-left" aria-label="Projet : My Azerty">
           <div class="project-content">
             <div class="project-text">
               <div class="project-header">
                 <h3 class="project-title">My Azerty</h3>
-                <span class="badge badge-status badge-ecommerce">E-commerce</span>
-                <span class="badge badge-progress badge-completed">Terminée</span>
               </div>
-              <p class="project-context">Boutique</p>
+              <p class="project-context">Boutique Shopify & SEO</p>
               <p class="project-description">
-                Configuration et développement d'une boutique de claviers mécaniques customisés. Stratégie de branding, intégration du tunnel d'achat et tracking des conversions.
+                Boutique Shopify complète et stratégie SEO/tracking pour un concept de claviers custom fabriqués en France en disposition AZERTY.
               </p>
               <div class="project-tech-stack">
                 <span class="tech-tag">Shopify</span>
-                <span class="tech-tag">UI/UX</span>
-                <span class="tech-tag">GTM/GA4</span>
-                <span class="tech-tag">Liquid</span>
+                <span class="tech-tag">GA4</span>
+                <span class="tech-tag">GTM</span>
+                <span class="tech-tag">Looker Studio</span>
+                <span class="tech-tag">SEO</span>
               </div>
-              <a href="#" class="btn btn-primary btn-project">
+              <a class="btn btn-primary btn-project" href="project-my-azerty.html">
                 <i class="fas fa-arrow-right"></i> Voir le projet
               </a>
             </div>
           </div>
           <div class="project-media">
-            <div class="media-placeholder" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-              <span class="media-icon">🛒</span>
-              <span class="media-text">Vidéo bientôt</span>
-            </div>
-          </div>
-        </article>
-
-      </div>
-
-      <!-- ANCIENNE GRILLE DE PROJETS (À SUPPRIMER APRÈS TEST) -->
-      <div class="projects-grid">
-
-        <!-- PROJET 1 -->
-        <article class="project-card" aria-label="Projet : Drive-to-Store Game">
-          <div class="card-header">
-            <h3 class="card-title">Drive-to-Store Game</h3>
-            <div class="card-badges">
-              <span class="badge badge-context badge-school">HETIC</span>
-              <span class="badge badge-status badge-done">Terminée</span>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="card-stack">
-              <span class="stack-tag">HTML5</span>
-              <span class="stack-tag">CSS3</span>
-              <span class="stack-tag">JavaScript</span>
-              <span class="stack-tag">Figma</span>
-            </div>
-            <div class="card-description">
-              <div class="desc-item">
-                <span class="desc-icon"><i class="fas fa-flag-checkered"></i></span>
-                <div>
-                  <strong>Problème initial :</strong>
-                  <p>Attirer une clientèle d'acheteurs en ligne vers des points de vente physiques via un jeu "instant gagnant" engageant et fidèle à l'image de marque.</p>
-                </div>
-              </div>
-              <div class="desc-item">
-                <span class="desc-icon"><i class="fas fa-wrench"></i></span>
-                <div>
-                  <strong>Outils utilisés :</strong>
-                  <p>Figma (wireframes, Design System), intégration HTML/CSS Mobile-first avec micro-interactions JS. Parcours UX : Inscription -> Jeu -> Gain -> Retrait en boutique.</p>
-                </div>
-              </div>
-              <div class="desc-item">
-                <span class="desc-icon"><i class="fas fa-graduation-cap"></i></span>
-                <div>
-                  <strong>Compétences acquises :</strong>
-                  <p>Stratégie UX Web-to-Store, prototypage Figma, conception UI/UX, intégration responsive Mobile-first, animation CSS et micro-interactions.</p>
-                </div>
-              </div>
-            </div>
-            <div class="card-actions">
-              <a href="#" class="btn btn-small btn-primary"><i class="fas fa-external-link-alt"></i> Lien Prod</a>
-              <a href="#" class="btn btn-small btn-ghost"><i class="fab fa-github"></i> Lien Code</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- PROJET 2 -->
-        <article class="project-card" aria-label="Projet : Site Vitrine Boulangerie">
-          <div class="card-header">
-            <h3 class="card-title">Site Vitrine Boulangerie</h3>
-            <div class="card-badges">
-              <span class="badge badge-context badge-perso">Valtech - Stage</span>
-              <span class="badge badge-status badge-done">Terminée</span>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="card-stack">
-              <span class="stack-tag">HTML5</span>
-              <span class="stack-tag">CSS3</span>
-              <span class="stack-tag">Bootstrap</span>
-              <span class="stack-tag">JavaScript</span>
-              <span class="stack-tag">Git</span>
-            </div>
-            <div class="card-description">
-              <div class="desc-item">
-                <span class="desc-icon"><i class="fas fa-flag-checkered"></i></span>
-                <div>
-                  <strong>Problème initial :</strong>
-                  <p>Un artisan boulanger sans présence digitale avait besoin d'un site vitrine pour toucher de nouveaux clients et valoriser ses produits.</p>
-                </div>
-              </div>
-              <div class="desc-item">
-                <span class="desc-icon"><i class="fas fa-wrench"></i></span>
-                <div>
-                  <strong>Outils utilisés :</strong>
-                  <p>Front-end HTML/CSS/JS responsive, back-end PHP avec gestion BDD MySQL, déploiement et tests via Git/GitHub en équipe Valtech.</p>
-                </div>
-              </div>
-              <div class="desc-item">
-                <span class="desc-icon"><i class="fas fa-graduation-cap"></i></span>
-                <div>
-                  <strong>Compétences acquises :</strong>
-                  <p>Architecture Full Stack de bout en bout, gestion BDD relationnelle, tests techniques, débogage, déploiement. Livraison client en environnement professionnel.</p>
-                </div>
-              </div>
-            </div>
-            <div class="card-actions">
-              <a href="#" class="btn btn-small btn-primary"><i class="fas fa-external-link-alt"></i> Lien Prod</a>
-              <a href="#" class="btn btn-small btn-ghost"><i class="fab fa-github"></i> Lien Code</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- PROJET 3 -->
-        <article class="project-card" aria-label="Projet : Pit Stop challenge">
-          <div class="card-header">
-            <h3 class="card-title">Pit Stop challenge</h3>
-            <div class="card-badges">
-              <span class="badge badge-context badge-school">Personnel</span>
-              <span class="badge badge-status badge-done">En cours </span>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="card-stack">
-              <span class="stack-tag">Google Ai studio</span>
-              
-            </div>
-            <div class="card-description">
-              <div class="desc-item">
-                <span class="desc-icon"><i class="fas fa-flag-checkered"></i></span>
-                <div>
-                  <strong>Problème initial :</strong>
-                  <p>je voulais créer un site web interactif avec l'aide de Google Ai studio tout en alliant ma paasion pour l'automobile. et les jeux de réactivité </p>
-                </div>
-              </div>
-              <div class="desc-item">
-                <span class="desc-icon"><i class="fas fa-wrench"></i></span>
-                <div>
-                  <strong>Outils utilisés :</strong>
-                  <p>Google Ai studio  et stytch pour les maquettes </p>
-                </div>
-              </div>
-              <div class="desc-item">
-                <span class="desc-icon"><i class="fas fa-graduation-cap"></i></span>
-                <div>
-                  <strong>Compétences acquises :</strong>
-                  <p>Premier vrai projet en No code, j'ai appris a comment bien prompter pour avoirr ce que l'on imaginais sur son interface</p>
-                </div>
-              </div>
-            </div>
-            <div class="card-actions">
-              <a href="#" class="btn btn-small btn-primary"><i class="fas fa-external-link-alt"></i> Lien Prod</a>
-              <a href="#" class="btn btn-small btn-ghost"><i class="fab fa-github"></i> Lien Code</a>
+            <div class="media-placeholder media-placeholder--azerty">
+              <img src="assets/images/projects/my-azerty/accueil.png" alt="Page d'accueil de la boutique My Azerty" class="project-screenshot" loading="lazy">
             </div>
           </div>
         </article>
@@ -415,6 +328,8 @@
       SECTION 3 : À PROPOS
     ========================================== -->
     <section id="apropos" class="section about-section" aria-labelledby="about-title">
+
+      <img class="mini-me mini-me--tennis" src="assets/images/about/mini-me/tennis.png" alt="" aria-hidden="true" loading="lazy">
 
       <div class="section-header">
         <h2 id="about-title" class="section-title">
@@ -431,27 +346,23 @@
             <div class="rim-outer">
               <div class="rim-inner">
                 <img
-                  src="https://placehold.co/250x250/1a1a1a/ffffff?text=Q.O"
+                  src="assets/images/profile-photo.png"
                   alt="Portrait de Quentin Oudin, développeur Full Stack"
                   class="profile-photo"
                 />
-              </div>
-              <div class="rim-spokes" aria-hidden="true">
-                <span></span><span></span><span></span>
-                <span></span><span></span><span></span>
               </div>
             </div>
           </div>
 
           <div class="about-quick-info">
             <div class="quick-item">
-              <i class="fas fa-map-marker-alt"></i> Paris et sa périphérie
+              <i class="fas fa-map-marker-alt"></i> Mobilité nationale
             </div>
             <div class="quick-item">
               <i class="fas fa-graduation-cap"></i> Bachelor Dev Web - HETIC
             </div>
             <div class="quick-item">
-              <i class="fas fa-phone"></i> 06.65.45.87.55
+              <i class="fas fa-phone"></i> 06.65.45.87.35
             </div>
             <div class="quick-item">
               <i class="fas fa-language"></i> Français (nat.) · Anglais B1
@@ -483,18 +394,18 @@
             <div class="timeline-item">
               <div class="timeline-dot"></div>
               <div class="timeline-content">
-                <span class="timeline-date">03/2026 - 06/2026</span>
-                <strong>Développeur Front-End / UX Designer - HETIC</strong>
-                <p>Création d'un jeu "instant gagnant" Drive-to-Store : stratégie UX, Design System Figma, intégration HTML/CSS Mobile-first enrichie de micro-interactions.</p>
+                <span class="timeline-date">2025 - 2028</span>
+                <strong>Bachelor Développement Web - HETIC, Montreuil</strong>
+                <p>Formation 3 ans orientée Full Stack, UX/UI, marketing digital et data.</p>
               </div>
             </div>
 
             <div class="timeline-item">
               <div class="timeline-dot"></div>
               <div class="timeline-content">
-                <span class="timeline-date">2025 - 2028</span>
-                <strong>Bachelor Développement Web - HETIC, Montreuil</strong>
-                <p>Formation 3 ans orientée Full Stack, UX/UI, marketing digital et data.</p>
+                <span class="timeline-date">Été 2026</span>
+                <strong>Équipier polyvalent - McDonald's</strong>
+                <p>Job d'été : accueil client, préparation et service, travail en équipe sous rythme soutenu.</p>
               </div>
             </div>
 
@@ -547,6 +458,57 @@
 
           <div class="passions">
             <h4 class="passions-title"><i class="fas fa-heart"></i> Passions & Valeurs</h4>
+
+            <div class="passion-reveal">
+              <article class="passion-card passion-card--left">
+                <img src="assets/images/about/mini-me/trophy.png" alt="Quentin Oudin passionné de Formule 1" loading="lazy">
+                <div class="passion-card__text">
+                  <h5>Formule 1</h5>
+                  <p>Passionné de F1 depuis toujours : je ne rate aucune course, autant pour la stratégie que pour l'adrénaline du dimanche après-midi.</p>
+                </div>
+              </article>
+
+              <article class="passion-card passion-card--right">
+                <img src="assets/images/about/mini-me/karting.png" alt="Quentin Oudin en karting" loading="lazy">
+                <div class="passion-card__text">
+                  <h5>Karting</h5>
+                  <p>Le karting a été ma première vraie expérience de pilotage : sensations pures et retour immédiat sur chaque geste, une école de précision.</p>
+                </div>
+              </article>
+
+              <article class="passion-card passion-card--left">
+                <img src="assets/images/about/mini-me/rally.png" alt="Quentin Oudin passionné de rallye" loading="lazy">
+                <div class="passion-card__text">
+                  <h5>Rallye</h5>
+                  <p>Le rallye m'attire par son mélange de pilotage technique et de lecture de terrain, une discipline exigeante que je suis de près.</p>
+                </div>
+              </article>
+
+              <article class="passion-card passion-card--right">
+                <img src="assets/images/about/mini-me/simracing.png" alt="Quentin Oudin en sim racing" loading="lazy">
+                <div class="passion-card__text">
+                  <h5>Sim Racing</h5>
+                  <p>Passionné de sim racing depuis longtemps, je transpire pour cette discipline que je pratique aussi bien en solo qu'en équipe.</p>
+                </div>
+              </article>
+
+              <article class="passion-card passion-card--left">
+                <img src="assets/images/about/mini-me/tennis.png" alt="Quentin Oudin au tennis" loading="lazy">
+                <div class="passion-card__text">
+                  <h5>Tennis</h5>
+                  <p>Je joue au tennis depuis longtemps, en club comme en loisir : un sport individuel qui m'a appris la rigueur et la gestion de la pression.</p>
+                </div>
+              </article>
+
+              <article class="passion-card passion-card--right">
+                <img src="assets/images/about/mini-me/dj.png" alt="Quentin Oudin en train de mixer" loading="lazy">
+                <div class="passion-card__text">
+                  <h5>Musique</h5>
+                  <p>Derrière les platines, je mixe pour décompresser : la musique électronique est mon terrain de jeu créatif en dehors du code.</p>
+                </div>
+              </article>
+            </div>
+
             <div class="passion-tags">
               <span class="passion-tag"><i class="fas fa-car"></i> Sports mécaniques</span>
               <span class="passion-tag"><i class="fas fa-music"></i> Musique</span>
@@ -567,6 +529,8 @@
       SECTION 4 : CONTACT
     ========================================== -->
     <section id="contact" class="section contact-section" aria-labelledby="contact-title">
+
+      <img class="mini-me mini-me--simracing" src="assets/images/about/mini-me/simracing.png" alt="" aria-hidden="true" loading="lazy">
 
       <div class="section-header">
         <h2 id="contact-title" class="section-title">
@@ -615,28 +579,20 @@
           <ul class="contact-details" role="list">
             <li>
               <i class="fas fa-envelope" aria-hidden="true"></i>
-              <a href="mailto:quentin.oudin@email.com">Mail</a>
+              <a href="mailto:quentin.oudin.tech@gmail.com">quentin.oudin.tech@gmail.com</a>
             </li>
             <li>
               <i class="fas fa-phone" aria-hidden="true"></i>
-              <span>06.65.45.87.55</span>
-            </li>
-            <li>
-              <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-              <span>Paris et sa périphérie</span>
-            </li>
-            <li>
-              <i class="fas fa-globe" aria-hidden="true"></i>
-              <a href="#" target="_blank" rel="noopener noreferrer">Portfolio</a>
+              <span>06.65.45.87.35</span>
             </li>
           </ul>
 
           <div class="social-links" aria-label="Réseaux sociaux">
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-btn">
+            <a href="https://linkedin.com/in/quentinoudin" target="_blank" rel="noopener noreferrer" class="social-btn">
               <i class="fab fa-linkedin-in"></i>
               <span>LinkedIn</span>
             </a>
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-btn">
+            <a href="https://github.com/quentinoudin" target="_blank" rel="noopener noreferrer" class="social-btn">
               <i class="fab fa-github"></i>
               <span>GitHub</span>
             </a>
@@ -653,15 +609,6 @@
     </section>
 
   </main>
-
-
-  <footer class="site-footer" role="contentinfo">
-    <p>
-      Conçu &amp; codé par <strong>Quentin Oudin</strong> - 2025
-      <span class="footer-separator" aria-hidden="true">//</span>
-      <i class="fas fa-code" aria-hidden="true"></i> HTML · CSS · JS pur
-    </p>
-  </footer>
 
   <script src="portfolio.js"></script>
 </body>

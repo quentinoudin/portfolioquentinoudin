@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Car Value Tracker - Détail du projet de Quentin Oudin" />
+  <title>Car Value Tracker - Quentin Oudin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Slab:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .project-page {
+      min-height: 100vh;
+      padding: 2rem clamp(1.25rem, 5vw, 3rem) 4rem;
+      background:
+        radial-gradient(circle at top left, rgba(59, 130, 246, 0.16), transparent 28%),
+        radial-gradient(circle at top right, rgba(14, 165, 233, 0.12), transparent 26%),
+        linear-gradient(180deg, #0b1220 0%, #0f172a 42%, #111827 100%);
+    }
+    .project-page__shell { width: min(1140px, 100%); margin: 0 auto; }
+    .project-page__back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      color: #93c5fd;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-family: var(--f-title);
+      font-size: 0.8rem;
+    }
+    .project-page__back:hover { color: #dbeafe; }
+    .project-page__hero {
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+      border-radius: 1.25rem;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.92) 0%, rgba(30, 64, 175, 0.9) 55%, rgba(37, 99, 235, 0.92) 100%);
+      color: #f8fafc;
+      margin-bottom: 1.2rem;
+      border: 1px solid rgba(147, 197, 253, 0.18);
+      box-shadow: 0 24px 70px rgba(2, 6, 23, 0.38);
+    }
+    .project-page__eyebrow { font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(248, 250, 252, 0.7); margin-bottom: 0.75rem; }
+    .project-page__hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 0.8rem; color: #ffffff; }
+    .project-page__subtitle { color: rgba(248, 250, 252, 0.88); font-size: 1.05rem; line-height: 1.7; max-width: 70ch; margin-bottom: 1.25rem; }
+    .project-page__meta, .project-page__chips { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .project-page__meta { margin-bottom: 0.9rem; }
+    .project-page__meta span, .project-page__chips span, .project-page__link { display: inline-flex; align-items: center; padding: 0.45rem 0.7rem; border-radius: 999px; font-size: 0.8rem; line-height: 1; }
+    .project-page__meta span { background: rgba(255, 255, 255, 0.12); color: #f8fafc; border: 1px solid rgba(255, 255, 255, 0.16); }
+    .project-page__chips span { background: rgba(191, 219, 254, 0.96); color: #0f172a; }
+    .project-page__layout { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr); gap: 1.25rem; margin-bottom: 1.25rem; }
+    .project-page__panel {
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.96) 0%, rgba(17, 24, 39, 0.96) 100%);
+      border-radius: 1rem;
+      border: 1px solid rgba(96, 165, 250, 0.18);
+      padding: 1.25rem;
+      box-shadow: 0 18px 45px rgba(2, 6, 23, 0.26);
+    }
+    .project-page__panel h2 { color: #dbeafe; margin-bottom: 0.8rem; font-size: 1rem; }
+    .project-page__panel p { color: #cbd5e1; line-height: 1.8; font-size: 0.96rem; }
+    .project-page__list { display: grid; gap: 0.7rem; padding-left: 1rem; }
+    .project-page__list li { color: #cbd5e1; line-height: 1.7; font-size: 0.95rem; }
+    .project-page__captures { display: grid; gap: 1rem; }
+    .project-page__media-shell {
+      border-radius: 1.15rem;
+      border: 1px solid rgba(96, 165, 250, 0.18);
+      background:
+        linear-gradient(180deg, rgba(15, 23, 42, 0.84) 0%, rgba(30, 41, 59, 0.96) 100%),
+        radial-gradient(circle at top right, rgba(96, 165, 250, 0.16), transparent 35%);
+      padding: 1rem;
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+    .project-page__media-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      color: #dbeafe;
+    }
+    .project-page__media-top h2 { margin: 0; font-size: 1rem; color: #dbeafe; }
+    .project-page__carousel {
+      flex: 1;
+      border-radius: 1rem;
+      border: 1px dashed rgba(147, 197, 253, 0.45);
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(14, 165, 233, 0.08));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 1.25rem;
+      gap: 0.75rem;
+      min-height: 220px;
+    }
+    .project-page__carousel-rail {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+    .project-page__thumb {
+      min-height: 76px;
+      border-radius: 0.9rem;
+      background: rgba(148, 163, 184, 0.16);
+      border: 1px solid rgba(147, 197, 253, 0.22);
+    }
+    .capture-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+    .capture-card { min-height: 180px; border-radius: 1rem; padding: 1rem; display: flex; flex-direction: column; justify-content: flex-end; color: #fff; box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12); }
+    .capture-card h3 { font-size: 1rem; margin-bottom: 0.35rem; }
+    .capture-card p { color: rgba(255,255,255,0.86); font-size: 0.88rem; line-height: 1.55; }
+    .capture-card--1 { background: linear-gradient(135deg, #4f46e5 0%, #0f172a 100%); }
+    .capture-card--2 { background: linear-gradient(135deg, #7c3aed 0%, #111827 100%); }
+    .capture-card--3 { background: linear-gradient(135deg, #2563eb 0%, #0f172a 100%); }
+    .project-page__links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem; }
+    .project-page__link { background: #111827; color: #f8fafc; text-decoration: none; cursor: pointer; }
+    .project-page__link--secondary { background: #e2e8f0; color: #0f172a; }
+    .project-page__link--disabled { opacity: 0.45; cursor: not-allowed; pointer-events: none; }
+    .project-page__note { margin-top: 1rem; color: #64748b; font-size: 0.88rem; font-style: italic; }
+    @media (max-width: 900px) { .project-page__layout, .capture-grid, .project-page__carousel-rail { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <main class="project-page">
+    <div class="project-page__shell">
+      <a class="project-page__back" href="index.html#projets"><i class="fas fa-arrow-left" aria-hidden="true"></i> Retour aux projets</a>
+
+      <section class="project-page__hero">
+        <p class="project-page__eyebrow">Projet solo · Hackathon HETIC</p>
+        <h1>Car Value Tracker</h1>
+        <p class="project-page__subtitle">Un site encore en cours de développement pour créer des alertes personnalisées, suivre l’évolution de son garage et générer un rapport PDF personnalisé par véhicule.</p>
+        <div class="project-page__meta">
+          <span>Solo</span><span>27 mai → 2 juin 2026</span><span>Lovable, Supabase, Stripe, Gmail, Figma</span>
+        </div>
+        <div class="project-page__chips"><span>⚠ Projet en cours de développement</span><span>100 % no-code</span><span>Alertes personnalisées</span><span>Rapport PDF par véhicule</span></div>
+        <div class="project-page__links">
+          <span class="project-page__link project-page__link--disabled" aria-disabled="true" title="Lien à venir"><i class="fas fa-arrow-up-right-from-square"></i> Voir le site</span>
+          <span class="project-page__link project-page__link--secondary project-page__link--disabled" aria-disabled="true" title="Lien à venir"><i class="fab fa-github"></i> GitHub</span>
+        </div>
+      </section>
+
+      <section class="project-page__media-shell">
+        <div class="project-page__media-top">
+          <h2>Captures d'écran</h2>
+          <span class="project-page__note">Aperçu de l'interface Car Value Tracker</span>
+        </div>
+        <div class="screenshot-carousel">
+          <div class="screenshot-carousel__viewport">
+            <div class="screenshot-carousel__track">
+              <div class="screenshot-carousel__slide"><img class="is-portrait" src="assets/images/projects/car-value-tracker/accueil.png" alt="Écran d'accueil : estimation par plaque d'immatriculation" loading="lazy"></div>
+              <div class="screenshot-carousel__slide"><img class="is-portrait" src="assets/images/projects/car-value-tracker/recherche-manuelle.png" alt="Recherche manuelle d'un véhicule" loading="lazy"></div>
+              <div class="screenshot-carousel__slide"><img class="is-portrait" src="assets/images/projects/car-value-tracker/garage.png" alt="Garage : suivi des véhicules enregistrés" loading="lazy"></div>
+              <div class="screenshot-carousel__slide"><img class="is-portrait" src="assets/images/projects/car-value-tracker/watchlist.png" alt="Watchlist et historique de cote" loading="lazy"></div>
+              <div class="screenshot-carousel__slide"><img class="is-portrait" src="assets/images/projects/car-value-tracker/pix.png" alt="Détail d'estimation d'un véhicule" loading="lazy"></div>
+              <div class="screenshot-carousel__slide"><img class="is-portrait" src="assets/images/projects/car-value-tracker/faq.png" alt="Foire aux questions" loading="lazy"></div>
+            </div>
+          </div>
+          <button type="button" class="screenshot-carousel__btn screenshot-carousel__btn--prev" aria-label="Image précédente"><i class="fas fa-chevron-left"></i></button>
+          <button type="button" class="screenshot-carousel__btn screenshot-carousel__btn--next" aria-label="Image suivante"><i class="fas fa-chevron-right"></i></button>
+          <div class="screenshot-carousel__dots"></div>
+        </div>
+      </section>
+
+      <div class="project-page__layout">
+        <section class="project-page__panel">
+          <h2>Résumé</h2>
+          <p>Le site est encore en cours de production : je n’ai pas eu le temps de le finaliser pendant le hackathon. L’idée est de transformer une recherche de cote ponctuelle en un suivi continu : créer des alertes personnalisées, suivre l’évolution de son garage, et générer pour chaque voiture un document PDF personnalisé — les problèmes les plus connus, les points forts/faibles du modèle, et une cote personnalisée selon l’usure et le kilométrage. Bref, tout ce qu’il faut pour bien acheter sa voiture.</p>
+        </section>
+
+        <section class="project-page__panel">
+          <h2>Ce qui a été livré</h2>
+          <ul class="project-page__list">
+            <li>Identification du véhicule par plaque d’immatriculation.</li>
+            <li>Création d’alertes personnalisées.</li>
+            <li>Suivi de l’évolution de son garage (watchlist).</li>
+            <li>Génération d’un PDF personnalisé par véhicule (problèmes connus, points forts/faibles, cote selon usure/kilométrage).</li>
+            <li>Authentification et gestion des comptes.</li>
+          </ul>
+        </section>
+
+        <section class="project-page__panel">
+          <h2>Bilan</h2>
+          <p>Le temps du hackathon n’a pas suffi pour aller au bout de l’idée, le site reste un prototype en cours de développement. Le jury a surtout retenu l’angle “suivi et alertes” et le fait qu’un projet solo ait intégré une vraie logique produit dès le départ.</p>
+        </section>
+
+        <section class="project-page__panel">
+          <h2>⚠ À savoir avant de tester</h2>
+          <p>Le site est encore en cours de production et le back-end n’est pas actif sur cette démo : une estimation réelle nécessite une connexion payante à l’API de l’Argus, non souscrite pour ce prototype. Si vous testez avec votre propre plaque, la recherche ne renverra donc rien — utilisez la plaque de démonstration indiquée sur l’écran d’accueil (TW-893-G0) pour voir le parcours complet.</p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="portfolio.js"></script>
+</body>
+</html>

@@ -137,16 +137,16 @@ function initSplashScreen() {
     if (currentRPM >= RPM_REDZONE && !vibrationTriggered) {
       vibrationTriggered = true;
 
-      // On change la couleur de l'arc en bleu vif
-      arcFill.style.stroke = '#4a90e2';
+      // On change la couleur de l'arc en rouge vif
+      arcFill.style.stroke = '#e00000';
 
       // On déclenche la vibration CSS
       if (tachoWrapper) tachoWrapper.classList.add('vibrating');
 
       // On met à jour le texte de statut
       if (splashStatus) {
-        splashStatus.textContent = 'Zone bleue atteinte !';
-        splashStatus.style.color = '#4a90e2';
+        splashStatus.textContent = 'Zone rouge atteinte !';
+        splashStatus.style.color = '#ff3333';
       }
     }
 
@@ -197,14 +197,14 @@ function initSplashScreen() {
 
 /* ================================================================
    02. CURSEUR F1 — SUIVI SOURIS + ORIENTATION + TRACES DE PNEUS
-   
+
    Principe :
    - On récupère la position de la souris en temps réel (mousemove).
    - On déplace le div #cursor-f1 à cette position.
    - On calcule l'angle de déplacement avec Math.atan2 (trigonométrie).
-   - On applique une rotation CSS pour orienter l'emoji dans la bonne direction.
+   - On applique une rotation CSS pour orienter l'icône dans la bonne direction.
    - On génère des petites divs "traces de pneus" qui disparaissent en fondu.
-   
+
    Note : Cet effet est désactivé sur mobile (pas de souris).
 ================================================================ */
 
@@ -275,10 +275,8 @@ function initCustomCursor() {
       const angleRad = Math.atan2(dy, dx);
       const angleDeg = angleRad * (180 / Math.PI);
 
-      // On applique la rotation à l'emoji
-      // +90° de correction car l'emoji 🏎️ pointe vers la droite par défaut,
-      // et on veut qu'il pointe vers le haut pour suivre la direction de mouvement.
-      cursorEl.style.transform = `rotate(${angleDeg + 90}deg)`;
+      // On applique une légère rotation à la touche pour suivre la direction du mouvement.
+      cursorEl.style.transform = `rotate(${angleDeg}deg)`;
 
       // --- Création des traces de pneus ---
       traceCounter++;
@@ -311,11 +309,6 @@ function createTireTrace(x, y) {
   // Création d'un nouveau div
   const trace = document.createElement('div');
   trace.classList.add('tire-trace');
-
-  // Positionnement à la position actuelle de la souris
-  // On soustrait la moitié de la taille (6px / 2 = 3px) pour centrer
-  trace.style.left = (x - 3) + 'px';
-  trace.style.top  = (y - 3) + 'px';
 
   // Variation aléatoire de la taille pour plus de réalisme
   const size = Math.random() * 4 + 4; // Entre 4px et 8px
@@ -628,6 +621,255 @@ function animateGauge(circle, display, targetPercent) {
  */
 function initScrollAnimations() {
 
+
+
+/* ================================================================
+   07. PROJETS — MODAL DE DÉTAIL
+================================================================ */
+
+const projectDetails = {
+  'car-value-tracker': {
+    title: 'Car Value Tracker',
+    subtitle: 'Estimation de cote auto lisible et suivi de prix personnalisé',
+    meta: [
+      'Solo',
+      'HETIC - Bachelor Développeur Web',
+      '27 mai → 2 juin 2026',
+      'Lovable, Supabase, Stripe, Gmail, Figma'
+    ],
+    chips: ['100 % no-code', '100/100 crédits Lovable', '~25 h de dev', '3 niveaux de monétisation'],
+    sections: [
+      {
+        title: 'Le problème',
+        content: 'Estimer la valeur réelle d’un véhicule d’occasion reste frustrant : les outils gratuits donnent des fourchettes larges, et les cotes de référence restent payantes à la consultation. Le vrai manque, c’est le suivi dans le temps, avec des alertes et une lecture claire du marché.'
+      },
+      {
+        title: 'Cadrage',
+        content: 'J’ai figé le cahier des charges avant d’ouvrir Lovable pour éviter de brûler du budget sur une idée encore floue. L’angle retenu a été le suivi dans la durée, pas le simple simulateur de cote.'
+      },
+      {
+        title: 'Solution livrée',
+        bullets: [
+          'Identification du véhicule par plaque d’immatriculation',
+          'Watchlist et historique de cote par véhicule',
+          'Alertes email personnalisées',
+          'Pack Négociation avec arguments pour l’achat',
+          'Volet business plan / modèle économique',
+          'Authentification et gestion des comptes'
+        ]
+      },
+      {
+        title: 'Stack & architecture',
+        content: 'Lovable porte le front et la logique d’écran, Supabase gère les utilisateurs, Stripe couvre le paiement ponctuel et l’abonnement, Gmail gère les notifications, et Figma a servi de base au design system.'
+      },
+      {
+        title: 'Modèle économique',
+        bullets: [
+          'Gratuit : estimation consultable, rapport détaillé verrouillé',
+          'Pack Négociation : 4,99 € / véhicule',
+          'Car Value+ : 4,99 € / mois'
+        ]
+      },
+      {
+        title: 'Bilan',
+        content: 'Le jury a surtout réagi à l’angle “suivi et alertes” et au fait qu’un volet business ait été pensé dès le départ sur un projet solo en une semaine. Le point faible a davantage été la restitution orale que le produit lui-même.'
+      },
+      {
+        title: 'Prochaine étape',
+        content: 'Brancher une vraie source de cote dynamique sur l’architecture déjà prête, puis mesurer l’usage réel des alertes et les conversions entre gratuit, Pack Négociation et Car Value+.'
+      }
+    ]
+  },
+  'pixar-quest': {
+    title: 'Pixar Quest',
+    subtitle: 'Une chambre d’enfant 3D avec 20 objets cachés liés à 20 films Pixar',
+    meta: [
+      'Équipe de 4',
+      'Dev web, lead de facto, génération 3D',
+      '~3 mois',
+      'Three.js, React, Blender, Tripo AI, GLB'
+    ],
+    chips: ['20 objets 3D', '3 niveaux de difficulté', '15/20', 'Navigation navigateur'],
+    sections: [
+      {
+        title: 'Le brief',
+        content: 'Le projet consistait à reconstruire l’expérience d’un pop-corn garage en 3D interactive. Nous avons choisi Pixar pour construire une chasse aux références familière, dans une chambre d’enfant cohérente visuellement.'
+      },
+      {
+        title: 'Mécanique du jeu',
+        bullets: [
+          'Choix d’un niveau de difficulté en début de partie',
+          'Exploration d’une scène 3D navigable',
+          'Quiz au clic sur chaque objet',
+          'Scoring et écran de résultat',
+          'Temps de réponse et vies ajustés selon la difficulté'
+        ]
+      },
+      {
+        title: 'Livré',
+        bullets: [
+          'Scène 3D complète avec 20 objets',
+          'Système de quiz et validation',
+          '3 niveaux de difficulté',
+          'Scoring et rendu final par film',
+          'Pipeline de génération et d’optimisation des assets'
+        ]
+      },
+      {
+        title: 'Pipeline 3D',
+        content: 'Tripo AI a servi pour les objets les plus simples à partir d’images produites en amont, Blender a pris le relais pour les objets complexes, et l’optimisation GLB a été ajoutée ensuite pour résoudre les problèmes de performance liés aux 20 objets.'
+      },
+      {
+        title: 'Ce qui a bloqué',
+        content: 'Les Easter eggs par film n’ont pas pu être livrés faute de temps en fin de projet, mais la scène reste jouable et la proposition de jeu est complète.'
+      },
+      {
+        title: 'Bilan',
+        content: 'Le projet a validé une scène 3D cohérente, un gameplay fonctionnel et une identité visuelle forte, avec une note de 15/20 à la soutenance.'
+      },
+      {
+        title: 'Prochaine étape',
+        content: 'Réintroduire les Easter eggs prévus par film et étendre la mécanique à d’autres univers avec le même pipeline Tripo AI + Blender + optimisation GLB.'
+      }
+    ]
+  },
+  'my-azerty': {
+    title: 'MyAzerty',
+    subtitle: 'Boutique Shopify et stratégie marketing pour des claviers custom AZERTY fabriqués en France',
+    meta: [
+      'Équipe pluridisciplinaire',
+      'Mon périmètre : boutique, contenu, visuels, Google Business',
+      '4 mois',
+      'Shopify, GA4, GTM, Looker Studio, SEO'
+    ],
+    chips: ['Boutique Shopify', '5 outils marketing maîtrisés', '0 trafic réel', 'Concept très niche'],
+    sections: [
+      {
+        title: 'Le concept',
+        content: 'MyAzerty part d’un vide de marché : le clavier custom est dominé par le QWERTY/ANSI, alors qu’une partie des utilisateurs francophones veut garder l’AZERTY tout en accédant à un produit premium.'
+      },
+      {
+        title: 'Ce qui a été construit',
+        bullets: [
+          'Boutique Shopify complète : thème, structure, contenu, visuels',
+          'Fiches produits et visuels générés',
+          'Fiche Google Business Profile et Google Maps',
+          'Recherche de mots-clés via Google Trends',
+          'Tracking GA4 + GTM',
+          'Dashboard Looker Studio'
+        ]
+      },
+      {
+        title: 'Mon périmètre',
+        content: 'Je me suis surtout occupé de la génération de la boutique Shopify, de la configuration du thème, de la rédaction des textes et de l’intégration des visuels sur l’ensemble du site.'
+      },
+      {
+        title: 'Stratégie marketing',
+        bullets: [
+          'Valider le positionnement produit',
+          'Construire les mots-clés avant le site',
+          'Monter la boutique Shopify',
+          'Instrumenter le tracking avant le lancement',
+          'Préparer le reporting et le référencement local'
+        ]
+      },
+      {
+        title: 'Stack & outils',
+        content: 'Shopify porte la boutique, GA4 et GTM capturent le comportement des visiteurs, Looker Studio centralise le reporting, et Google Business Profile apporte la visibilité locale.'
+      },
+      {
+        title: 'Limite principale',
+        content: 'La boutique est restée protégée par mot de passe, donc aucune donnée de trafic ou de conversion réelle n’a été collectée, seulement des tests internes.'
+      },
+      {
+        title: 'Prochaine étape',
+        content: 'Lever la protection, lancer publiquement, tester une première acquisition payante, puis mesurer l’impact réel via le dashboard déjà en place.'
+      }
+    ]
+  }
+};
+
+function initProjectModal() {
+
+  const modal = document.getElementById('project-modal');
+  const modalContent = document.getElementById('project-modal-content');
+  const modalCloseButtons = document.querySelectorAll('[data-modal-close]');
+  const projectButtons = document.querySelectorAll('[data-project]');
+
+  if (!modal || !modalContent || projectButtons.length === 0) return;
+
+  function renderProjectSections(sections) {
+    return sections.map(function(section) {
+      const listItems = section.bullets
+        ? `<ul class="project-modal__list">${section.bullets.map(function(item) {
+            return `<li>${item}</li>`;
+          }).join('')}</ul>`
+        : '';
+
+      const content = section.content ? `<p>${section.content}</p>` : '';
+
+      return `
+        <section class="project-modal__section">
+          <h4>${section.title}</h4>
+          ${content}
+          ${listItems}
+        </section>
+      `;
+    }).join('');
+  }
+
+  function openModal(projectId) {
+    const project = projectDetails[projectId];
+    if (!project) return;
+
+    modalContent.innerHTML = `
+      <div class="project-modal__hero">
+        <p class="project-modal__eyebrow">Détail du projet</p>
+        <h3 id="project-modal-title">${project.title}</h3>
+        <p class="project-modal__subtitle">${project.subtitle}</p>
+        <div class="project-modal__meta">
+          ${project.meta.map(function(item) {
+            return `<span>${item}</span>`;
+          }).join('')}
+        </div>
+        <div class="project-modal__chips">
+          ${project.chips.map(function(item) {
+            return `<span>${item}</span>`;
+          }).join('')}
+        </div>
+      </div>
+      <div class="project-modal__body">
+        ${renderProjectSections(project.sections)}
+      </div>
+    `;
+
+    modal.hidden = false;
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+  }
+
+  function closeModal() {
+    modal.hidden = true;
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+  }
+
+  projectButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+      openModal(button.getAttribute('data-project'));
+    });
+  });
+
+  modalCloseButtons.forEach(function(button) {
+    button.addEventListener('click', closeModal);
+  });
+
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape' && !modal.hidden) {
+      closeModal();
+    }
+  });
+}
   // Sélection de tous les éléments à animer au scroll
   // On utilise querySelectorAll pour obtenir une NodeList
   const animatableElements = document.querySelectorAll(
@@ -678,8 +920,437 @@ function initScrollAnimations() {
 
 
 /* ================================================================
+   07. PROJETS — MODAL DE DÉTAIL
+================================================================ */
+
+const projectDetails = {
+  'car-value-tracker': {
+    title: 'Car Value Tracker',
+    subtitle: 'Estimation de cote auto lisible et suivi de prix personnalisé',
+    meta: [
+      'Solo',
+      'HETIC - Bachelor Développeur Web',
+      '27 mai → 2 juin 2026',
+      'Lovable, Supabase, Stripe, Gmail, Figma'
+    ],
+    chips: ['100 % no-code', '100/100 crédits Lovable', '~25 h de dev', '3 niveaux de monétisation'],
+    sections: [
+      {
+        title: 'Le problème',
+        content: 'Estimer la valeur réelle d’un véhicule d’occasion reste frustrant : les outils gratuits donnent des fourchettes larges, et les cotes de référence restent payantes à la consultation. Le vrai manque, c’est le suivi dans le temps, avec des alertes et une lecture claire du marché.'
+      },
+      {
+        title: 'Cadrage',
+        content: 'J’ai figé le cahier des charges avant d’ouvrir Lovable pour éviter de brûler du budget sur une idée encore floue. L’angle retenu a été le suivi dans la durée, pas le simple simulateur de cote.'
+      },
+      {
+        title: 'Solution livrée',
+        bullets: [
+          'Identification du véhicule par plaque d’immatriculation',
+          'Watchlist et historique de cote par véhicule',
+          'Alertes email personnalisées',
+          'Pack Négociation avec arguments pour l’achat',
+          'Volet business plan / modèle économique',
+          'Authentification et gestion des comptes'
+        ]
+      },
+      {
+        title: 'Stack & architecture',
+        content: 'Lovable porte le front et la logique d’écran, Supabase gère les utilisateurs, Stripe couvre le paiement ponctuel et l’abonnement, Gmail gère les notifications, et Figma a servi de base au design system.'
+      },
+      {
+        title: 'Modèle économique',
+        bullets: [
+          'Gratuit : estimation consultable, rapport détaillé verrouillé',
+          'Pack Négociation : 4,99 € / véhicule',
+          'Car Value+ : 4,99 € / mois'
+        ]
+      },
+      {
+        title: 'Bilan',
+        content: 'Le jury a surtout réagi à l’angle “suivi et alertes” et au fait qu’un volet business ait été pensé dès le départ sur un projet solo en une semaine. Le point faible a davantage été la restitution orale que le produit lui-même.'
+      },
+      {
+        title: 'Prochaine étape',
+        content: 'Brancher une vraie source de cote dynamique sur l’architecture déjà prête, puis mesurer l’usage réel des alertes et les conversions entre gratuit, Pack Négociation et Car Value+.'
+      }
+    ]
+  },
+  'pixar-quest': {
+    title: 'Pixar Quest',
+    subtitle: 'Une chambre d’enfant 3D avec 20 objets cachés liés à 20 films Pixar',
+    meta: [
+      'Équipe de 4',
+      'Dev web, lead de facto, génération 3D',
+      '~3 mois',
+      'Three.js, React, Blender, Tripo AI, GLB'
+    ],
+    chips: ['20 objets 3D', '3 niveaux de difficulté', '15/20', 'Navigation navigateur'],
+    sections: [
+      {
+        title: 'Le brief',
+        content: 'Le projet consistait à reconstruire l’expérience d’un pop-corn garage en 3D interactive. Nous avons choisi Pixar pour construire une chasse aux références familière, dans une chambre d’enfant cohérente visuellement.'
+      },
+      {
+        title: 'Mécanique du jeu',
+        bullets: [
+          'Choix d’un niveau de difficulté en début de partie',
+          'Exploration d’une scène 3D navigable',
+          'Quiz au clic sur chaque objet',
+          'Scoring et écran de résultat',
+          'Temps de réponse et vies ajustés selon la difficulté'
+        ]
+      },
+      {
+        title: 'Livré',
+        bullets: [
+          'Scène 3D complète avec 20 objets',
+          'Système de quiz et validation',
+          '3 niveaux de difficulté',
+          'Scoring et rendu final par film',
+          'Pipeline de génération et d’optimisation des assets'
+        ]
+      },
+      {
+        title: 'Pipeline 3D',
+        content: 'Tripo AI a servi pour les objets les plus simples à partir d’images produites en amont, Blender a pris le relais pour les objets complexes, et l’optimisation GLB a été ajoutée ensuite pour résoudre les problèmes de performance liés aux 20 objets.'
+      },
+      {
+        title: 'Ce qui a bloqué',
+        content: 'Les Easter eggs par film n’ont pas pu être livrés faute de temps en fin de projet, mais la scène reste jouable et la proposition de jeu est complète.'
+      },
+      {
+        title: 'Bilan',
+        content: 'Le projet a validé une scène 3D cohérente, un gameplay fonctionnel et une identité visuelle forte, avec une note de 15/20 à la soutenance.'
+      },
+      {
+        title: 'Prochaine étape',
+        content: 'Réintroduire les Easter eggs prévus par film et étendre la mécanique à d’autres univers avec le même pipeline Tripo AI + Blender + optimisation GLB.'
+      }
+    ]
+  },
+  'my-azerty': {
+    title: 'MyAzerty',
+    subtitle: 'Boutique Shopify et stratégie marketing pour des claviers custom AZERTY fabriqués en France',
+    meta: [
+      'Équipe pluridisciplinaire',
+      'Mon périmètre : boutique, contenu, visuels, Google Business',
+      '4 mois',
+      'Shopify, GA4, GTM, Looker Studio, SEO'
+    ],
+    chips: ['Boutique Shopify', '5 outils marketing maîtrisés', '0 trafic réel', 'Concept très niche'],
+    sections: [
+      {
+        title: 'Le concept',
+        content: 'MyAzerty part d’un vide de marché : le clavier custom est dominé par le QWERTY/ANSI, alors qu’une partie des utilisateurs francophones veut garder l’AZERTY tout en accédant à un produit premium.'
+      },
+      {
+        title: 'Ce qui a été construit',
+        bullets: [
+          'Boutique Shopify complète : thème, structure, contenu, visuels',
+          'Fiches produits et visuels générés',
+          'Fiche Google Business Profile et Google Maps',
+          'Recherche de mots-clés via Google Trends',
+          'Tracking GA4 + GTM',
+          'Dashboard Looker Studio'
+        ]
+      },
+      {
+        title: 'Mon périmètre',
+        content: 'Je me suis surtout occupé de la génération de la boutique Shopify, de la configuration du thème, de la rédaction des textes et de l’intégration des visuels sur l’ensemble du site.'
+      },
+      {
+        title: 'Stratégie marketing',
+        bullets: [
+          'Valider le positionnement produit',
+          'Construire les mots-clés avant le site',
+          'Monter la boutique Shopify',
+          'Instrumenter le tracking avant le lancement',
+          'Préparer le reporting et le référencement local'
+        ]
+      },
+      {
+        title: 'Stack & outils',
+        content: 'Shopify porte la boutique, GA4 et GTM capturent le comportement des visiteurs, Looker Studio centralise le reporting, et Google Business Profile apporte la visibilité locale.'
+      },
+      {
+        title: 'Limite principale',
+        content: 'La boutique est restée protégée par mot de passe, donc aucune donnée de trafic ou de conversion réelle n’a été collectée, seulement des tests internes.'
+      },
+      {
+        title: 'Prochaine étape',
+        content: 'Lever la protection, lancer publiquement, tester une première acquisition payante, puis mesurer l’impact réel via le dashboard déjà en place.'
+      }
+    ]
+  }
+};
+
+function initProjectModal() {
+
+  const modal = document.getElementById('project-modal');
+  const modalContent = document.getElementById('project-modal-content');
+  const modalCloseButtons = document.querySelectorAll('[data-modal-close]');
+  const projectButtons = document.querySelectorAll('[data-project]');
+
+  if (!modal || !modalContent || projectButtons.length === 0) return;
+
+  function renderProjectSections(sections) {
+    return sections.map(function(section) {
+      const listItems = section.bullets
+        ? `<ul class="project-modal__list">${section.bullets.map(function(item) {
+            return `<li>${item}</li>`;
+          }).join('')}</ul>`
+        : '';
+
+      const content = section.content ? `<p>${section.content}</p>` : '';
+
+      return `
+        <section class="project-modal__section">
+          <h4>${section.title}</h4>
+          ${content}
+          ${listItems}
+        </section>
+      `;
+    }).join('');
+  }
+
+  function openModal(projectId) {
+    const project = projectDetails[projectId];
+    if (!project) return;
+
+    modalContent.innerHTML = `
+      <div class="project-modal__hero">
+        <p class="project-modal__eyebrow">Détail du projet</p>
+        <h3 id="project-modal-title">${project.title}</h3>
+        <p class="project-modal__subtitle">${project.subtitle}</p>
+        <div class="project-modal__meta">
+          ${project.meta.map(function(item) {
+            return `<span>${item}</span>`;
+          }).join('')}
+        </div>
+        <div class="project-modal__chips">
+          ${project.chips.map(function(item) {
+            return `<span>${item}</span>`;
+          }).join('')}
+        </div>
+      </div>
+      <div class="project-modal__body">
+        ${renderProjectSections(project.sections)}
+      </div>
+    `;
+
+    modal.hidden = false;
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+  }
+
+  function closeModal() {
+    modal.hidden = true;
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+  }
+
+  projectButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+      openModal(button.getAttribute('data-project'));
+    });
+  });
+
+  modalCloseButtons.forEach(function(button) {
+    button.addEventListener('click', closeModal);
+  });
+
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape' && !modal.hidden) {
+      closeModal();
+    }
+  });
+}
+
+
+/* ================================================================
+   06 BIS. CARROUSEL DE CAPTURES D'ÉCRAN — PAGES PROJET
+
+   Principe :
+   - Chaque .screenshot-carousel contient un track flex avec une slide
+     par image, plus des boutons prev/next et des points de navigation.
+   - On déplace le track avec un translateX(index * -100%).
+   - Défilement automatique toutes les 4 secondes, mis en pause au survol
+     et relancé après une navigation manuelle.
+================================================================ */
+
+function initScreenshotCarousels() {
+
+  const carousels = document.querySelectorAll('.screenshot-carousel');
+  if (carousels.length === 0) return;
+
+  const AUTOPLAY_DELAY = 4000; // ms entre deux slides
+
+  carousels.forEach(function(carousel) {
+
+    const track   = carousel.querySelector('.screenshot-carousel__track');
+    const slides  = Array.from(carousel.querySelectorAll('.screenshot-carousel__slide'));
+    const prevBtn = carousel.querySelector('.screenshot-carousel__btn--prev');
+    const nextBtn = carousel.querySelector('.screenshot-carousel__btn--next');
+    const dotsWrap = carousel.querySelector('.screenshot-carousel__dots');
+
+    if (!track || slides.length === 0) return;
+
+    let index = 0;
+    let dots = [];
+    let autoplayTimer = null;
+
+    if (dotsWrap) {
+      slides.forEach(function(_, i) {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'screenshot-carousel__dot';
+        dot.setAttribute('aria-label', 'Aller à l’image ' + (i + 1));
+        dot.addEventListener('click', function() { goTo(i); restartAutoplay(); });
+        dotsWrap.appendChild(dot);
+      });
+      dots = Array.from(dotsWrap.children);
+    }
+
+    function update() {
+      track.style.transform = 'translateX(' + (index * -100) + '%)';
+      dots.forEach(function(dot, i) {
+        dot.classList.toggle('is-active', i === index);
+      });
+    }
+
+    function goTo(i) {
+      index = (i + slides.length) % slides.length;
+      update();
+    }
+
+    function stopAutoplay() {
+      if (autoplayTimer) {
+        clearInterval(autoplayTimer);
+        autoplayTimer = null;
+      }
+    }
+
+    function startAutoplay() {
+      if (slides.length < 2) return; // pas besoin de défiler s'il n'y a qu'une image
+      stopAutoplay();
+      autoplayTimer = setInterval(function() {
+        goTo(index + 1);
+      }, AUTOPLAY_DELAY);
+    }
+
+    function restartAutoplay() {
+      startAutoplay();
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', function() { goTo(index - 1); restartAutoplay(); });
+    if (nextBtn) nextBtn.addEventListener('click', function() { goTo(index + 1); restartAutoplay(); });
+
+    // Pause au survol pour laisser le temps de regarder une image
+    carousel.addEventListener('mouseenter', stopAutoplay);
+    carousel.addEventListener('mouseleave', startAutoplay);
+
+    update();
+    startAutoplay();
+  });
+}
+
+
+/* ================================================================
+   06 TER. LIGHTBOX — AFFICHAGE D'UNE CAPTURE EN GRAND
+
+   Principe :
+   - Un seul overlay est créé et réutilisé pour toutes les images.
+   - Cliquer sur une image de carrousel l'affiche en grand par-dessus la page.
+   - Fermeture au clic sur la croix, en dehors de l'image, ou touche Échap.
+================================================================ */
+
+function initLightbox() {
+
+  const images = document.querySelectorAll('.screenshot-carousel__slide img');
+  if (images.length === 0) return;
+
+  const overlay = document.createElement('div');
+  overlay.className = 'lightbox-overlay';
+  overlay.setAttribute('role', 'dialog');
+  overlay.setAttribute('aria-modal', 'true');
+  overlay.setAttribute('aria-label', 'Aperçu de l’image en grand');
+  overlay.innerHTML =
+    '<button type="button" class="lightbox-close" aria-label="Fermer l’aperçu"><i class="fas fa-times"></i></button>' +
+    '<img src="" alt="" />';
+  document.body.appendChild(overlay);
+
+  const overlayImg = overlay.querySelector('img');
+  const closeBtn   = overlay.querySelector('.lightbox-close');
+
+  function openLightbox(src, alt) {
+    overlayImg.src = src;
+    overlayImg.alt = alt || '';
+    overlay.classList.add('is-open');
+    document.body.classList.add('lightbox-open');
+  }
+
+  function closeLightbox() {
+    overlay.classList.remove('is-open');
+    document.body.classList.remove('lightbox-open');
+  }
+
+  images.forEach(function(img) {
+    img.addEventListener('click', function() {
+      openLightbox(img.currentSrc || img.src, img.alt);
+    });
+  });
+
+  closeBtn.addEventListener('click', closeLightbox);
+
+  // Clic en dehors de l'image (sur le fond sombre) = fermeture
+  overlay.addEventListener('click', function(event) {
+    if (event.target === overlay) closeLightbox();
+  });
+
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape' && overlay.classList.contains('is-open')) {
+      closeLightbox();
+    }
+  });
+}
+
+
+/* ================================================================
+   06 QUATER. RÉVÉLATION AU SCROLL — GALERIE DE PASSIONS
+
+   Principe :
+   - Chaque .passion-card démarre décalée (gauche/droite) et invisible.
+   - Un IntersectionObserver ajoute .is-visible quand la carte entre
+     dans le viewport, ce qui déclenche la transition CSS (fondu + glissement).
+================================================================ */
+
+function initPassionReveal() {
+
+  const cards = document.querySelectorAll('.passion-card');
+  if (cards.length === 0) return;
+
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.25,
+    rootMargin: '0px 0px -60px 0px'
+  });
+
+  cards.forEach(function(card) {
+    observer.observe(card);
+  });
+}
+
+
+/* ================================================================
    07. FORMULAIRE DE CONTACT — VALIDATION + FEEDBACK
-   
+
    Principe :
    - On intercepte la soumission du formulaire (preventDefault).
    - On valide que les champs ne sont pas vides.
@@ -798,7 +1469,7 @@ document.addEventListener('DOMContentLoaded', function() {
    * 4. Speedomètre de scroll (décoratif)
    * 5. Animations scroll (pour les entrées visuelles)
    * 6. Formulaire (interactivité)
-   * 
+   *
    * NOTE : initSkillGauges() est appelée à la FIN du splash screen
    * (dans initSplashScreen) pour s'assurer que les jauges ne s'animent
    * pas pendant que l'overlay les masque.
@@ -809,7 +1480,11 @@ document.addEventListener('DOMContentLoaded', function() {
   initNavigation();         // 03 — Comportements de navigation
   initScrollSpeedometer();  // 04 — Compteur de vitesse de scroll
   initScrollAnimations();   // 05 — Animations d'apparition au scroll
-  initContactForm();        // 06 — Formulaire de contact
+  initProjectModal();       // 06 — Détail des projets
+  initScreenshotCarousels(); // 06 bis — Carrousels de captures d'écran
+  initLightbox();           // 06 ter — Lightbox des captures d'écran
+  initPassionReveal();      // 06 quater — Révélation au scroll des passions
+  initContactForm();        // 07 — Formulaire de contact
 
   // Ultime secours : garantit que l'interface n'est jamais bloquée.
   setTimeout(function() {

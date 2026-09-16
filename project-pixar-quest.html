@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Pixar Quest - Détail du projet de Quentin Oudin" />
+  <title>Pixar Quest - Quentin Oudin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Slab:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .project-page {
+      min-height: 100vh;
+      padding: 2rem clamp(1.25rem, 5vw, 3rem) 4rem;
+      background:
+        radial-gradient(circle at top left, rgba(59, 130, 246, 0.16), transparent 28%),
+        radial-gradient(circle at top right, rgba(14, 165, 233, 0.12), transparent 26%),
+        linear-gradient(180deg, #0b1220 0%, #0f172a 42%, #111827 100%);
+    }
+    .project-page__shell { width: min(1140px, 100%); margin: 0 auto; }
+    .project-page__back { display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; color: #93c5fd; text-transform: uppercase; letter-spacing: 0.08em; font-family: var(--f-title); font-size: 0.8rem; }
+    .project-page__back:hover { color: #dbeafe; }
+    .project-page__hero { padding: clamp(1.5rem, 4vw, 2.5rem); border-radius: 1.25rem; background: linear-gradient(135deg, rgba(15, 23, 42, 0.92) 0%, rgba(30, 64, 175, 0.9) 55%, rgba(37, 99, 235, 0.92) 100%); color: #f8fafc; margin-bottom: 1.2rem; border: 1px solid rgba(147, 197, 253, 0.18); box-shadow: 0 24px 70px rgba(2, 6, 23, 0.38); }
+    .project-page__eyebrow { font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(248, 250, 252, 0.72); margin-bottom: 0.75rem; }
+    .project-page__hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 0.8rem; color: #ffffff; }
+    .project-page__subtitle { color: rgba(248, 250, 252, 0.88); font-size: 1.05rem; line-height: 1.7; max-width: 70ch; margin-bottom: 1.25rem; }
+    .project-page__meta, .project-page__chips { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .project-page__meta { margin-bottom: 0.9rem; }
+    .project-page__meta span, .project-page__chips span, .project-page__link { display: inline-flex; align-items: center; padding: 0.45rem 0.7rem; border-radius: 999px; font-size: 0.8rem; line-height: 1; }
+    .project-page__meta span { background: rgba(255, 255, 255, 0.12); color: #f8fafc; border: 1px solid rgba(255, 255, 255, 0.16); }
+    .project-page__chips span { background: rgba(191, 219, 254, 0.96); color: #0f172a; }
+    .project-page__layout { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr); gap: 1.25rem; margin-bottom: 1.25rem; }
+    .project-page__panel { background: linear-gradient(180deg, rgba(15, 23, 42, 0.96) 0%, rgba(17, 24, 39, 0.96) 100%); border-radius: 1rem; border: 1px solid rgba(96, 165, 250, 0.18); padding: 1.25rem; box-shadow: 0 18px 45px rgba(2, 6, 23, 0.26); }
+    .project-page__panel h2 { color: #dbeafe; margin-bottom: 0.8rem; font-size: 1rem; }
+    .project-page__panel p { color: #cbd5e1; line-height: 1.8; font-size: 0.96rem; }
+    .project-page__list { display: grid; gap: 0.7rem; padding-left: 1rem; }
+    .project-page__list li { color: #cbd5e1; line-height: 1.7; font-size: 0.95rem; }
+    .project-page__captures { display: grid; gap: 1rem; }
+    .project-page__media-shell { border-radius: 1.15rem; border: 1px solid rgba(96, 165, 250, 0.18); background: linear-gradient(180deg, rgba(15, 23, 42, 0.84) 0%, rgba(30, 41, 59, 0.96) 100%), radial-gradient(circle at top right, rgba(96, 165, 250, 0.16), transparent 35%); padding: 1rem; min-height: 320px; display: flex; flex-direction: column; gap: 0.9rem; }
+    .project-page__media-top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; color: #dbeafe; }
+    .project-page__media-top h2 { margin: 0; font-size: 1rem; color: #dbeafe; }
+    .project-page__carousel { flex: 1; border-radius: 1rem; border: 1px dashed rgba(147, 197, 253, 0.45); background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(14, 165, 233, 0.08)); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 1.25rem; gap: 0.75rem; min-height: 220px; }
+    .project-page__carousel-rail { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; }
+    .project-page__thumb { min-height: 76px; border-radius: 0.9rem; background: rgba(148, 163, 184, 0.16); border: 1px solid rgba(147, 197, 253, 0.22); }
+    .capture-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+    .capture-card { min-height: 180px; border-radius: 1rem; padding: 1rem; display: flex; flex-direction: column; justify-content: flex-end; color: #fff; box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12); }
+    .capture-card h3 { font-size: 1rem; margin-bottom: 0.35rem; }
+    .capture-card p { color: rgba(255,255,255,0.86); font-size: 0.88rem; line-height: 1.55; }
+    .capture-card--1 { background: linear-gradient(135deg, #2563eb 0%, #0f172a 100%); }
+    .capture-card--2 { background: linear-gradient(135deg, #1d4ed8 0%, #111827 100%); }
+    .capture-card--3 { background: linear-gradient(135deg, #0ea5e9 0%, #0f172a 100%); }
+    .project-page__links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem; }
+    .project-page__link { background: #111827; color: #f8fafc; text-decoration: none; cursor: pointer; }
+    .project-page__link--secondary { background: #e2e8f0; color: #0f172a; }
+    .project-page__link--disabled { opacity: 0.45; cursor: not-allowed; pointer-events: none; }
+    .project-page__note { margin-top: 1rem; color: #64748b; font-size: 0.88rem; font-style: italic; }
+    @media (max-width: 900px) { .project-page__layout, .capture-grid, .project-page__carousel-rail { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <main class="project-page">
+    <div class="project-page__shell">
+      <a class="project-page__back" href="index.html#projets"><i class="fas fa-arrow-left" aria-hidden="true"></i> Retour aux projets</a>
+
+      <section class="project-page__hero">
+        <p class="project-page__eyebrow">Projet d’équipe · Soutenance HETIC</p>
+        <h1>Pixar Quest</h1>
+        <p class="project-page__subtitle">Une chambre d’enfant peuplée de 20 objets cachés à relier à des films Pixar, pensée comme une chasse aux références jouable dans le navigateur.</p>
+        <div class="project-page__meta">
+          <span>Équipe de 4 · Lead du projet</span><span>Dev web & génération 3D</span><span>~3 mois</span><span>Three.js, React, Blender, Tripo AI, GLB</span>
+        </div>
+        <div class="project-page__chips"><span>20 objets 3D</span><span>3 niveaux de difficulté</span><span>Inspiré du format PopCorn Garage</span><span>Navigation navigateur</span></div>
+        <div class="project-page__links">
+          <span class="project-page__link project-page__link--disabled" aria-disabled="true" title="Lien à venir"><i class="fas fa-arrow-up-right-from-square"></i> Voir le site</span>
+          <span class="project-page__link project-page__link--secondary project-page__link--disabled" aria-disabled="true" title="Lien à venir"><i class="fab fa-github"></i> GitHub</span>
+        </div>
+      </section>
+
+      <section class="project-page__media-shell">
+        <div class="project-page__media-top">
+          <h2>Captures d'écran</h2>
+          <span class="project-page__note">Aperçu de la scène 3D Pixar Quest</span>
+        </div>
+        <div class="screenshot-carousel">
+          <div class="screenshot-carousel__viewport">
+            <div class="screenshot-carousel__track">
+              <div class="screenshot-carousel__slide"><img src="assets/images/projects/pixar-quest/accueil.png" alt="Vue de la chambre 3D avec les affiches Pixar" loading="lazy"></div>
+              <div class="screenshot-carousel__slide"><img src="assets/images/projects/pixar-quest/accueil-droite.png" alt="Vue panoramique de la chambre 3D" loading="lazy"></div>
+              <div class="screenshot-carousel__slide"><img src="assets/images/projects/pixar-quest/film.png" alt="Sélection d'un film à l'écran" loading="lazy"></div>
+              <div class="screenshot-carousel__slide"><img src="assets/images/projects/pixar-quest/reponse.png" alt="Écran de réponse au quiz" loading="lazy"></div>
+            </div>
+          </div>
+          <button type="button" class="screenshot-carousel__btn screenshot-carousel__btn--prev" aria-label="Image précédente"><i class="fas fa-chevron-left"></i></button>
+          <button type="button" class="screenshot-carousel__btn screenshot-carousel__btn--next" aria-label="Image suivante"><i class="fas fa-chevron-right"></i></button>
+          <div class="screenshot-carousel__dots"></div>
+        </div>
+      </section>
+
+      <div class="project-page__layout">
+        <section class="project-page__panel">
+          <h2>Genèse et choix du thème</h2>
+          <p>Le brief de départ était de s’inspirer du format des jeux <strong>PopCorn Garage</strong> — des mini-jeux narratifs en navigateur façon chasse aux objets/pop-culture — et de l’adapter à un univers cinématographique. Le groupe a validé la piste Pixar assez vite, mais pas seulement pour l’aspect nostalgique : c’est surtout la disponibilité d’une API exploitable pour récupérer les données des films (affiches, descriptions, avis) qui a fait pencher la balance, en sécurisant le développement plutôt que de partir sur du contenu à créer entièrement à la main.</p>
+        </section>
+
+        <section class="project-page__panel">
+          <h2>Mon rôle de lead</h2>
+          <p>En tant que lead de facto de l’équipe de 4, j’ai piloté la répartition technique du travail, tranché les choix techniques finaux (stack, pipeline 3D, architecture du quiz) et structuré le déroulé de la soutenance.</p>
+        </section>
+
+        <section class="project-page__panel">
+          <h2>Ce qui a été livré</h2>
+          <ul class="project-page__list">
+            <li>Scène 3D complète avec 20 objets.</li>
+            <li>Système de quiz et validation au clic.</li>
+            <li>3 niveaux de difficulté.</li>
+            <li>Scoring et écran de résultat.</li>
+            <li>Pipeline de génération et d’optimisation des assets 3D.</li>
+          </ul>
+        </section>
+
+        <section class="project-page__panel">
+          <h2>Bilan</h2>
+          <p>Le projet a validé une scène jouable et cohérente, malgré des contraintes de performance corrigées en cours de route. La plus grande frustration reste l’absence d’Easter eggs spécifiques à chaque film.</p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="portfolio.js"></script>
+</body>
+</html>

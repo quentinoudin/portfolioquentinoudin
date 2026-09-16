@@ -298,7 +298,7 @@ strong  { color: var(--t1); font-weight: 600; }
   margin-left: -14px;
   margin-top: -14px;
   will-change: transform, left, top;
-  color: var(--red);
+  color: #e00000;
 }
 
 #cursor-f1 svg {
@@ -850,6 +850,11 @@ strong  { color: var(--t1); font-weight: 600; }
 /* ================================================================
    11. À PROPOS
 ================================================================ */
+.about-section {
+  position: relative;
+  overflow: hidden;
+}
+
 .about-grid {
   display: grid;
   grid-template-columns: 260px 1fr;
@@ -894,22 +899,6 @@ strong  { color: var(--t1); font-weight: 600; }
   animation: rim-unrotate 22s linear infinite;
 }
 .profile-photo { width: 100%; height: 100%; object-fit: cover; }
-
-.rim-spokes { position: absolute; inset: 0; border-radius: 50%; pointer-events: none; }
-.rim-spokes span {
-  position: absolute;
-  top: 50%; left: 50%;
-  width: 80px; height: 2px;
-  background: linear-gradient(to right, transparent, var(--border));
-  transform-origin: left center;
-  margin-top: -1px;
-}
-.rim-spokes span:nth-child(1) { transform: rotate(0deg); }
-.rim-spokes span:nth-child(2) { transform: rotate(60deg); }
-.rim-spokes span:nth-child(3) { transform: rotate(120deg); }
-.rim-spokes span:nth-child(4) { transform: rotate(180deg); }
-.rim-spokes span:nth-child(5) { transform: rotate(240deg); }
-.rim-spokes span:nth-child(6) { transform: rotate(300deg); }
 
 /* Infos rapides */
 .about-quick-info {
@@ -1026,6 +1015,63 @@ strong  { color: var(--t1); font-weight: 600; }
 }
 .passions-title i { color: var(--red); }
 
+/* Galerie de passions : une photo + un texte par passion, révélées au scroll */
+.passion-reveal {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  margin: 0 0 var(--s3);
+}
+
+.passion-card {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  padding: 0.9rem 1.1rem;
+  border-radius: var(--r3);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
+  opacity: 0;
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  will-change: transform, opacity;
+}
+.passion-card--left  { transform: translateX(-32px); }
+.passion-card--right { transform: translateX(32px); }
+.passion-card.is-visible { opacity: 1; transform: translateX(0); }
+
+.passion-card img {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  border: 3px solid var(--red);
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.passion-card__text h5 {
+  font-family: var(--f-title);
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--t1);
+  margin-bottom: 0.3rem;
+}
+.passion-card__text p {
+  color: var(--t2);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .passion-card { transition: none; opacity: 1; transform: none; }
+}
+
+@media (max-width: 540px) {
+  .passion-card { flex-direction: column; text-align: center; }
+}
+
 .passion-tags { display: flex; flex-wrap: wrap; gap: 8px; }
 
 .passion-tag {
@@ -1052,6 +1098,8 @@ strong  { color: var(--t1); font-weight: 600; }
   background: var(--bg-alt);
   width: 100%;
   max-width: 100%;
+  position: relative;
+  overflow: hidden;
 }
 .contact-section > .section-header,
 .contact-section > .contact-grid {
@@ -1125,6 +1173,7 @@ strong  { color: var(--t1); font-weight: 600; }
   padding: 13px 16px;
   font-size: 0.95rem;
 }
+.form-confirmation[hidden] { display: none; }
 .form-confirmation i { font-size: 1.2rem; flex-shrink: 0; }
 
 /* Infos contact */
@@ -1567,19 +1616,18 @@ strong  { color: var(--t1); font-weight: 600; }
 /* FOOTER OVERRIDES */
 .site-footer {
   background: #131B4D !important;
-  color: #d0d0d0 !important;
+  color: #e8ecf5 !important;
   border-top: none !important;
 }
+.site-footer p { color: #e8ecf5 !important; }
 .site-footer strong { color: #ffffff !important; }
+.site-footer .footer-separator { color: var(--red) !important; }
 
 /* MISC HARDCODED COLORS REPLACEMENT */
 .tacho-rpm #rpm-display { color: #131B4D !important; }
 #splash-screen { background: var(--bg) !important; }
 .splash-label { color: #555555 !important; }
 .speed-value { color: var(--red) !important; }
-
-/* CURSOR F1 */
-#cursor-f1 { color: var(--red) !important; }
 
 
 /* ================================================================
@@ -1589,6 +1637,8 @@ strong  { color: var(--t1); font-weight: 600; }
 .projects-section-new {
   background: linear-gradient(135deg, #f8f9fa 0%, #e8ecf1 100%) !important;
   padding: 4rem 2rem !important;
+  position: relative;
+  overflow: hidden;
 }
 
 .projects-section-new .section-header {
@@ -1744,13 +1794,7 @@ strong  { color: var(--t1); font-weight: 600; }
   font-size: 0.875rem;
   font-weight: 500;
   border-radius: 0.5rem;
-  transition: all 0.3s ease;
-}
-
-.tech-tag:hover {
-  background: #3b82f6;
-  color: #ffffff;
-  transform: translateY(-2px);
+  cursor: default;
 }
 
 .btn-project {
@@ -1770,6 +1814,10 @@ strong  { color: var(--t1); font-weight: 600; }
   background: #2563eb !important;
   transform: translateX(4px);
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.btn-project:visited {
+  color: #ffffff !important;
 }
 
 .project-media {
@@ -1802,12 +1850,167 @@ strong  { color: var(--t1); font-weight: 600; }
   opacity: 0.9;
 }
 
+.media-placeholder--cvt {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.media-placeholder--pixar {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.media-placeholder--azerty {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.media-placeholder--boulangerie {
+  background: linear-gradient(135deg, #f6b93b 0%, #e58e26 100%);
+}
+
+.media-placeholder--pitstop {
+  background: linear-gradient(135deg, #1e1e1e 0%, #cc0000 100%);
+}
+
 video,
 img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+
+.project-screenshot {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.project-screenshot--portrait {
+  object-fit: contain;
+  padding: 2rem clamp(2.5rem, 8vw, 5rem);
+  box-sizing: border-box;
+}
+
+/* Carrousel de captures d'écran — pages de détail projet */
+.screenshot-carousel {
+  position: relative;
+}
+.screenshot-carousel__viewport {
+  overflow: hidden;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(147, 197, 253, 0.18);
+  box-shadow: 0 12px 30px rgba(2, 6, 23, 0.25);
+}
+.screenshot-carousel__track {
+  display: flex;
+  transition: transform 0.4s ease;
+}
+.screenshot-carousel__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+.screenshot-carousel__slide img {
+  width: 100%;
+  height: clamp(260px, 42vw, 420px);
+  object-fit: cover;
+  display: block;
+  cursor: zoom-in;
+}
+.screenshot-carousel__slide img.is-portrait {
+  object-fit: contain;
+  background: #0f172a;
+  padding: 1rem;
+}
+.screenshot-carousel__btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  border: none;
+  background: rgba(15, 23, 42, 0.75);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  font-size: 0.95rem;
+}
+.screenshot-carousel__btn:hover { background: rgba(59, 130, 246, 0.9); transform: translateY(-50%) scale(1.06); }
+.screenshot-carousel__btn--prev { left: 0.75rem; }
+.screenshot-carousel__btn--next { right: 0.75rem; }
+.screenshot-carousel__dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+}
+.screenshot-carousel__dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  border: none;
+  background: rgba(148, 163, 184, 0.35);
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+.screenshot-carousel__dot.is-active {
+  background: #3b82f6;
+  width: 1.4rem;
+  border-radius: 999px;
+}
+
+/* Lightbox — affichage d'une capture en grand */
+body.lightbox-open { overflow: hidden; }
+
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 8, 20, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: clamp(1.5rem, 5vw, 4rem);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.lightbox-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+}
+.lightbox-overlay img {
+  max-width: min(92vw, 1100px);
+  max-height: 88vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 0.75rem;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+}
+.lightbox-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.5rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+.lightbox-close:hover { background: rgba(255, 255, 255, 0.25); }
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
@@ -1858,4 +2061,54 @@ img {
     padding: 0.4rem 0.8rem;
     font-size: 0.8rem;
   }
+}
+
+
+/* ================================================================
+   17. MINI-MOI — FIGURINES FLOTTANTES DÉCORATIVES
+   Petits portraits circulaires (extraits du collage "passions") qui
+   dérivent doucement dans plusieurs sections du site.
+================================================================ */
+.mini-me {
+  position: absolute;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: 3px solid var(--red);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0.95;
+  object-fit: cover;
+  animation-name: mini-me-float;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes mini-me-float {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  25%  { transform: translate(8px, -10px) rotate(3deg); }
+  50%  { transform: translate(-5px, -16px) rotate(-2deg); }
+  75%  { transform: translate(-10px, -5px) rotate(2deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+/* Ancrées en pixels près des coins de section (pas en %) pour ne jamais
+   dériver au milieu d'une section haute et recouvrir du texte. La marge
+   tient compte de l'amplitude de l'animation ci-dessus pour ne pas être
+   rognées par l'overflow:hidden de la section. */
+.mini-me--trophy    { top: 90px;  right: 3%; animation-duration: 10s; }
+.mini-me--dj        { bottom: 60px; left: 3%; animation-duration: 12s; animation-delay: -3s; }
+.mini-me--karting   { top: 60px;  right: 3%; animation-duration: 11s; animation-delay: -6s; }
+.mini-me--rally     { bottom: 60px; left: 3%; animation-duration: 9s;  animation-delay: -2s; }
+.mini-me--tennis    { top: 60px;  right: 3%; animation-duration: 13s; animation-delay: -5s; }
+.mini-me--simracing { bottom: 60px; right: 3%; animation-duration: 10s; animation-delay: -8s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .mini-me { animation: none; }
+}
+
+/* On masque les figurines flottantes sur petit écran pour ne pas encombrer le contenu */
+@media (max-width: 900px) {
+  .mini-me { display: none; }
 }
