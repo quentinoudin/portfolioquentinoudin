@@ -872,8 +872,12 @@ function initProjectModal() {
 }
   // Sélection de tous les éléments à animer au scroll
   // On utilise querySelectorAll pour obtenir une NodeList
+  // Note : .about-grid est volontairement exclu — il contient désormais le
+  // .passion-scroll (plusieurs écrans de haut), ce qui rend son ratio de
+  // visibilité toujours inférieur au threshold ci-dessous (l'élément est bien
+  // trop grand pour jamais atteindre 10% de visibilité à l'écran).
   const animatableElements = document.querySelectorAll(
-    '.project-card, .about-grid, .contact-grid, .section-header, .skill-gauge'
+    '.project-card, .contact-grid, .section-header, .skill-gauge'
   );
 
   // Ajout de la classe de pré-animation (rend les éléments invisibles au départ)
@@ -1317,34 +1321,72 @@ function initLightbox() {
 
 
 /* ================================================================
-   06 QUATER. RÉVÉLATION AU SCROLL — GALERIE DE PASSIONS
+   06 QUATER. DÉROULÉ SÉQUENTIEL AU SCROLL — GALERIE DE PASSIONS
 
    Principe :
-   - Chaque .passion-card démarre décalée (gauche/droite) et invisible.
-   - Un IntersectionObserver ajoute .is-visible quand la carte entre
-     dans le viewport, ce qui déclenche la transition CSS (fondu + glissement).
+   - Chaque .passion-step est une piste de scroll haute (160vh) contenant
+     un bloc .passion-step__pin en position:sticky qui reste épinglé à
+     l'écran pendant qu'on scrolle à travers sa piste.
+   - On calcule une progression (0 à 1) de la piste par rapport au viewport :
+     0 = on vient d'entrer dans la piste, 1 = on est sur le point d'en sortir.
+   - En dessous d'un certain seuil de progression, la photo apparaît (fondu +
+     zoom), puis à un seuil plus avancé, le texte apparaît à son tour.
+   - Recalculé à chaque scroll (throttlé via requestAnimationFrame) et au resize.
 ================================================================ */
 
-function initPassionReveal() {
+function initPassionScroll() {
 
-  const cards = document.querySelectorAll('.passion-card');
-  if (cards.length === 0) return;
+  const steps = document.querySelectorAll('.passion-step');
+  if (steps.length === 0) return;
 
-  const observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      }
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Accessibilité / confort : pas d'animation scroll-liée, tout est visible directement.
+  if (prefersReducedMotion) {
+    steps.forEach(function(step) {
+      step.classList.add('is-photo-visible', 'is-text-visible');
     });
-  }, {
-    threshold: 0.25,
-    rootMargin: '0px 0px -60px 0px'
-  });
+    return;
+  }
 
-  cards.forEach(function(card) {
-    observer.observe(card);
-  });
+  const PHOTO_THRESHOLD = 0.15; // la photo apparaît dès 15% de progression dans la piste
+  const TEXT_THRESHOLD  = 0.4;  // le texte suit à 40%
+
+  let ticking = false;
+
+  function updateSteps() {
+    const viewportHeight = window.innerHeight;
+
+    steps.forEach(function(step) {
+      const rect = step.getBoundingClientRect();
+      const track = rect.height - viewportHeight;
+
+      // Piste plus courte que l'écran (ex. dernière étape) : on considère la
+      // progression comme pleine dès que son sommet atteint le haut de l'écran.
+      let progress = track <= 0
+        ? (rect.top <= 0 ? 1 : 0)
+        : (-rect.top) / track;
+
+      progress = Math.max(0, Math.min(1, progress));
+
+      step.classList.toggle('is-photo-visible', progress >= PHOTO_THRESHOLD);
+      step.classList.toggle('is-text-visible', progress >= TEXT_THRESHOLD);
+    });
+
+    ticking = false;
+  }
+
+  function requestUpdate() {
+    if (!ticking) {
+      requestAnimationFrame(updateSteps);
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', requestUpdate, { passive: true });
+  window.addEventListener('resize', requestUpdate);
+
+  updateSteps(); // état initial (si la section est déjà visible au chargement)
 }
 
 
@@ -1483,7 +1525,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initProjectModal();       // 06 — Détail des projets
   initScreenshotCarousels(); // 06 bis — Carrousels de captures d'écran
   initLightbox();           // 06 ter — Lightbox des captures d'écran
-  initPassionReveal();      // 06 quater — Révélation au scroll des passions
+  initPassionScroll();      // 06 quater — Déroulé séquentiel des passions au scroll
   initContactForm();        // 07 — Formulaire de contact
 
   // Ultime secours : garantit que l'interface n'est jamais bloquée.
